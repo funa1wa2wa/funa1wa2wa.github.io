@@ -43,17 +43,19 @@ for(let type of Object.keys(files)){
           database = database.concat(obj.map(x=>({
             name : x[4],
             meshcode : x[5],
-            date : x[6]
+            date : x[6],
+            year : Number("19"+x[6].slice(0, 2));
           })));
           break;
-        case "biodic":
+        case "biodic02":
           database = database.concat(obj.map(x=>({
             name : x[4],
             meshcode : x[0],
-            date : "78--"
+            date : "78--",
+            year : 1978;
           })));
           break;
-        case "biodic":
+        case "biodic06":
           database = database.concat(obj.map(x=>({
             name : x[0],
             meshcode : x[1].slice(0, 6),
@@ -67,5 +69,5 @@ for(let type of Object.keys(files)){
 }
 
 function CSVtoAry(str){
-  return str.replaceAll("\"", "").split("\n").map(x=>x.split(",")).filter(x=>x.length>1);
+  return str.replaceAll("\"", "").split(/\r?\n/).map(x=>x.split(",")).filter(x=>x.length>1);
 }

@@ -52,7 +52,7 @@ for(let type of Object.keys(files)){
             name : x[4],
             meshcode : x[0],
             date : "78--",
-            year : 1978;
+            year : 1978
           })));
           break;
         case "biodic06":

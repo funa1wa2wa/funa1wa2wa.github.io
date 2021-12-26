@@ -34,7 +34,7 @@ const files = {
 }
 for(let type of Object.keys(files)){
   for(let fileName of files[type]){
-    fetch(`biodic/${fileName}`)
+    fetch(`https://funa1wa2wa.github.io/seibutsusearch/database/biodic/${fileName}`)
     .then(res=>res.text())
     .then(text=>{
       let obj = CSVtoAry(text);

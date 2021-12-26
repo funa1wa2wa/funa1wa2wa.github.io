@@ -44,7 +44,7 @@ for(let type of Object.keys(files)){
             name : x[4],
             meshcode : x[5],
             date : x[6],
-            year : Number("19"+x[6].slice(0, 2));
+            year : Number("19"+x[6].slice(0, 2))
           })));
           break;
         case "biodic02":

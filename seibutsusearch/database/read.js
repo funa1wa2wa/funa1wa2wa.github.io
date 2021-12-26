@@ -4,34 +4,34 @@ let type = {};
 
 const files = {
   "biodic": [
-    "biodic/03_chorui.csv",
-    "biodic/04_honyurui.csv",
-    "biodic/04_kairui.csv",
-    "biodic/04_konchurui_cho.csv",
-    "biodic/04_konchurui_ga.csv",
-    "biodic/04_konchurui_kochu.csv",
-    "biodic/04_konchurui_semi.csv",
-    "biodic/04_konchurui_tonbo.csv",
-    "biodic/04_ryoseiruihachurui.csv",
-    "biodic/04_tansuigyorui.csv",
-    "biodic/05_honyurui.csv",
-    "biodic/05_kairui.csv",
-    "biodic/05_konchurui_cho.csv",
-    "biodic/05_konchurui_ga.csv",
-    "biodic/05_konchurui_kochu.csv",
-    "biodic/05_konchurui_semi.csv",
-    "biodic/05_konchurui_tonbo.csv",
-    "biodic/05_ryoseiruihachurui.csv",
-    "biodic/05_tansuigyorui.csv"
+    "biodic/do03_chorui.csv",
+    "biodic/do04_honyurui.csv",
+    "biodic/do04_kairui.csv",
+    "biodic/do04_konchurui_cho.csv",
+    "biodic/do04_konchurui_ga.csv",
+    "biodic/do04_konchurui_kochu.csv",
+    "biodic/do04_konchurui_semi.csv",
+    "biodic/do04_konchurui_tonbo.csv",
+    "biodic/do04_ryoseiruihachurui.csv",
+    "biodic/do04_tansuigyorui.csv",
+    "biodic/do05_honyurui.csv",
+    "biodic/do05_kairui.csv",
+    "biodic/do05_konchurui_cho.csv",
+    "biodic/do05_konchurui_ga.csv",
+    "biodic/do05_konchurui_kochu.csv",
+    "biodic/do05_konchurui_semi.csv",
+    "biodic/do05_konchurui_tonbo.csv",
+    "biodic/do05_ryoseiruihachurui.csv",
+    "biodic/do05_tansuigyorui.csv"
   ],
   "biodic02":[
-    "biodic/02_chorui_1.csv",
-    "biodic/02_chorui_2.csv",
-    "biodic/02_honyurui.csv",
-    "biodic/02_konchurui.csv",
+    "biodic/do02_chorui_1.csv",
+    "biodic/do02_chorui_2.csv",
+    "biodic/do02_honyurui.csv",
+    "biodic/do02_konchurui.csv",
   ],
   "biodic06":[
-    "biodic/06_honyurui.csv"
+    "biodic/do06_honyurui.csv"
   ],
   "gairai":[
     "gairai.csv"

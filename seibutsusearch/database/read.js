@@ -72,19 +72,19 @@ for(let type of Object.keys(files)){
           })));
           break;
         case "gairai":
-          ary.map(x=>{
+          for(let x of ary){
             gairai[x[4]] = {
               origin: x[0],
               specify: x[2],
               remark: x[10]=="*"?"":x[10],
               distribution: x[11]
             }
-          });
+          }
           break;
         case "type":
-          ary.map(x=>{
-            type[x[0]] = x[1]
-          });
+          for(let x of ary){
+            type[x[0]] = x[1];
+          }
           break;
       }
     });

@@ -53,28 +53,34 @@ for(let type of Object.keys(files)){
         let ary = CSVtoAry(text);
         switch(type){
           case "biodic":
-            database = database.concat(ary.map(x=>({
-              name : x[4],
-              meshcode : x[5],
-              date : x[6],
-              year : Number("19"+x[6].slice(0, 2))
-            })));
+            for(let x of ary){
+              database[x[5]] = database[x[5]] || [];
+              database[x[5]].push({
+                name : x[4],
+                date : x[6],
+                year : Number("19"+x[6].slice(0, 2))
+              })
+            }
             break;
           case "biodic02":
-            database = database.concat(ary.map(x=>({
-              name : x[4],
-              meshcode : x[0],
-              date : "78--",
-              year : 1978
-            })));
+            for(let x of ary){
+              database[x[0]] = database[x[0]] || [];
+              database[x[0]].push({
+                name : x[4],
+                date : "78--",
+                year : 1978
+              })
+            }
             break;
           case "biodic06":
-            database = database.concat(ary.map(x=>({
-              name : x[0],
-              meshcode : x[1].slice(0, 6),
-              date : "04--",
-              year : 2004
-            })));
+            for(let x of ary){
+              database[x[1].slice(0, 6)] = database[x[1].slice(0, 6)] || [];
+              database[x[1].slice(0, 6)].push({
+                name : x[0],
+                date : "04--",
+                year : 2004
+              })
+            }
             break;
           case "gairai":
             for(let x of ary){
@@ -89,8 +95,8 @@ for(let type of Object.keys(files)){
             break;
           case "type":
             for(let x of ary){
-              creature[x[0]] = creature[x[0]] || {};
-              creature[x[0]].type = x[1];
+              creature[x[1]] = creature[x[1]] || {};
+              creature[x[1]].type = x[0];
             }
             break;
         }

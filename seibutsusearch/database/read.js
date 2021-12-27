@@ -78,6 +78,7 @@ for(let type of Object.keys(files)){
             break;
           case "gairai":
             for(let x of ary){
+              creature[x[4]] = creature[x[4]] || {};
               Object.assign(creature[x[4]], {
                 origin: x[0],
                 specify: x[2],
@@ -88,6 +89,7 @@ for(let type of Object.keys(files)){
             break;
           case "type":
             for(let x of ary){
+              creature[x[0]] = creature[x[0]] || {};
               creature[x[0]].type = x[1];
             }
             break;

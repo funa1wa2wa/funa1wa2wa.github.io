@@ -53,7 +53,7 @@ for(let type of Object.keys(files)){
         let ary = CSVtoAry(text);
         switch(type){
           case "biodic":
-            database.push(...ary.map(x=>({
+            database = database.concat(ary.map(x=>({
               name : x[4],
               meshcode : x[5],
               date : x[6],
@@ -61,7 +61,7 @@ for(let type of Object.keys(files)){
             })));
             break;
           case "biodic02":
-            database.push(...ary.map(x=>({
+            database = database.concat(ary.map(x=>({
               name : x[4],
               meshcode : x[0],
               date : "78--",
@@ -69,7 +69,7 @@ for(let type of Object.keys(files)){
             })));
             break;
           case "biodic06":
-            database.push(...ary.map(x=>({
+            database = database.concat(ary.map(x=>({
               name : x[0],
               meshcode : x[1].slice(0, 6),
               date : "04--",

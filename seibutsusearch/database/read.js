@@ -1,6 +1,6 @@
 let database = [];
-let gairai = {};
-let type = {};
+let creature = {};
+let cityToMesh = {};
 
 const files = {
   "biodic": [
@@ -38,54 +38,62 @@ const files = {
   ],
   "type": [
     "type.csv"
-  ]
+  ],
+  "mesh": [
+    "2meshcodes.json"
+  ],
 }
+
 for(let type of Object.keys(files)){
   for(let fileName of files[type]){
     fetch(`https://funa1wa2wa.github.io/seibutsusearch/database/${fileName}`)
     .then(res=>res.text())
     .then(text=>{
-      let ary = CSVtoAry(text);
-      switch(type){
-        case "biodic":
-          database.push(...ary.map(x=>({
-            name : x[4],
-            meshcode : x[5],
-            date : x[6],
-            year : Number("19"+x[6].slice(0, 2))
-          })));
-          break;
-        case "biodic02":
-          database.push(...ary.map(x=>({
-            name : x[4],
-            meshcode : x[0],
-            date : "78--",
-            year : 1978
-          })));
-          break;
-        case "biodic06":
-          database.push(...ary.map(x=>({
-            name : x[0],
-            meshcode : x[1].slice(0, 6),
-            date : "04--",
-            year : 2004
-          })));
-          break;
-        case "gairai":
-          for(let x of ary){
-            gairai[x[4]] = {
-              origin: x[0],
-              specify: x[2],
-              remark: x[10]=="*"?"":x[10],
-              distribution: x[11]
+      if(type!="mesh"){
+        let ary = CSVtoAry(text);
+        switch(type){
+          case "biodic":
+            database.push(...ary.map(x=>({
+              name : x[4],
+              meshcode : x[5],
+              date : x[6],
+              year : Number("19"+x[6].slice(0, 2))
+            })));
+            break;
+          case "biodic02":
+            database.push(...ary.map(x=>({
+              name : x[4],
+              meshcode : x[0],
+              date : "78--",
+              year : 1978
+            })));
+            break;
+          case "biodic06":
+            database.push(...ary.map(x=>({
+              name : x[0],
+              meshcode : x[1].slice(0, 6),
+              date : "04--",
+              year : 2004
+            })));
+            break;
+          case "gairai":
+            for(let x of ary){
+              Object.assign(creature[x[4]], {
+                origin: x[0],
+                specify: x[2],
+                remark: x[10]=="*"?"":x[10],
+                distribution: x[11]
+              });
             }
-          }
-          break;
-        case "type":
-          for(let x of ary){
-            type[x[0]] = x[1];
-          }
-          break;
+            break;
+          case "type":
+            for(let x of ary){
+              creature[x[0]].type = x[1];
+            }
+            break;
+        }
+      }else{
+        cityToMesh = JSON.parse(text);
       }
     });
   }

@@ -102,6 +102,12 @@ for(let type of Object.keys(files)){
               creature[x[1]].type = x[0];
             }
             break;
+          case "area":
+            for(let x of ary){
+              creature[x[0]] = creature[x[0]] || {};
+              creature[x[0]].place = x.slice(1).map((x,i)=>[x, PLACE_NAME[i]])
+            }
+            break;
         }
       }else{
         cityToMesh = JSON.parse(text);

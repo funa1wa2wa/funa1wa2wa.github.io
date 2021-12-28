@@ -1,3 +1,5 @@
+const PLACE_NAME = ["河川上流", "河川中流", "河川下流(汽水域含む)", "湖", "農業用水", "池沼", "水田", "マングローブ", "畑", "森林", "草原", "住宅地", "高山", "牧場", "砂地", "その他"];
+
 let database = [];
 let creature = {};
 let cityToMesh = {};
@@ -42,6 +44,10 @@ const files = {
   "mesh": [
     "2meshcodes.json"
   ],
+  "area": [
+    "area/gyorui_area.csv",
+    "area/chorui_area.csv"
+  ]
 }
 
 for(let type of Object.keys(files)){

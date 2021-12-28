@@ -105,7 +105,7 @@ for(let type of Object.keys(files)){
           case "area":
             for(let x of ary){
               creature[x[0]] = creature[x[0]] || {};
-              creature[x[0]].place = x.slice(1).map((x,i)=>[x, PLACE_NAME[i]])
+              creature[x[0]].place = Object.fromEntries(x.slice(1).map((x,i)=>[PLACE_NAME[i], x]));
             }
             break;
         }

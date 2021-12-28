@@ -57,7 +57,6 @@ for(let type of Object.keys(files)){
               database[x[5]] = database[x[5]] || [];
               database[x[5]].push({
                 name : x[4],
-                date : x[6],
                 year : Number("19"+x[6].slice(0, 2))
               })
             }
@@ -67,7 +66,6 @@ for(let type of Object.keys(files)){
               database[x[0]] = database[x[0]] || [];
               database[x[0]].push({
                 name : x[4],
-                date : "78--",
                 year : 1978
               })
             }
@@ -77,7 +75,6 @@ for(let type of Object.keys(files)){
               database[x[1].slice(0, 6)] = database[x[1].slice(0, 6)] || [];
               database[x[1].slice(0, 6)].push({
                 name : x[0],
-                date : "04--",
                 year : 2004
               })
             }

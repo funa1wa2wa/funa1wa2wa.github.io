@@ -92,6 +92,7 @@ for(let type of Object.keys(files)){
             for(let x of ary){
               creature[x[4]] = creature[x[4]] || {};
               Object.assign(creature[x[4]], {
+                alien: true,
                 origin: x[0],
                 specify: x[2],
                 remark: x[10]=="*"?"":x[10],

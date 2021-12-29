@@ -109,7 +109,7 @@ for(let type of Object.keys(files)){
           case "area":
             for(let x of ary){
               creature[x[0]] = creature[x[0]] || {};
-              creature[x[0]].place = Object.fromEntries(x.slice(1).map((x,i)=>[PLACE_NAME[i], Boolean(x)]));
+              creature[x[0]].place = Object.fromEntries(x.slice(1).map((x,i)=>[PLACE_NAME[i], x==1]));
             }
             break;
           case "gakumei":

@@ -4,6 +4,7 @@ const TYPE_LIST = ["哺乳類", "貝類", "淡水魚類", "両生類・爬虫類
 let database = [];
 let creature = {};
 let cityToMesh = {};
+let damMesh = new Map();
 
 const files = {
   "biodic": [
@@ -51,6 +52,9 @@ const files = {
   ],
   "gakumei": [
     "gakumei.csv"
+  ],
+  "damMesh": [
+    "ksnkankyo/dam/dam_meshcode.csv"
   ]
 }
 
@@ -119,6 +123,10 @@ for(let type of Object.keys(files)){
               creature[x[1]].scientific  = x[0];
             }
             break;
+          case "damMesh":
+            for(let x of ary){
+              damMesh.set(x[0], x[1]);
+            }
         }
       }else{
         cityToMesh = JSON.parse(text);

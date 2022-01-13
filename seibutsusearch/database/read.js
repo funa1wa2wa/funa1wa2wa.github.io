@@ -58,7 +58,8 @@ const files = {
   ],
   "ksnkankyo": [
     "ksnkankyo/dam/dam_hokkaido.csv",
-    "ksnkankyo/dam/dam_tohoku.csv",
+    "ksnkankyo/dam/dam_tohoku1.csv",
+    "ksnkankyo/dam/dam_tohoku2.csv",
     "ksnkankyo/dam/dam_kanto.csv",
     "ksnkankyo/dam/dam_hokuriku.csv",
     "ksnkankyo/dam/dam_chubu.csv",

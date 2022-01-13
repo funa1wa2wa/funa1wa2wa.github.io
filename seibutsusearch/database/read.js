@@ -57,16 +57,16 @@ const files = {
     "ksj.csv"
   ],
   "ksnkankyo": [
-    "ksnkankyo/dam/hokkaido.csv",
-    "ksnkankyo/dam/tohoku.csv",
-    "ksnkankyo/dam/kanto.csv",
-    "ksnkankyo/dam/hokuriku.csv",
-    "ksnkankyo/dam/chubu.csv",
-    "ksnkankyo/dam/kinki.csv",
-    "ksnkankyo/dam/chugoku.csv",
-    "ksnkankyo/dam/shikoku.csv",
-    "ksnkankyo/dam/kyushu.csv",
-    "ksnkankyo/dam/okinawa.csv"
+    "ksnkankyo/dam/dam_hokkaido.csv",
+    "ksnkankyo/dam/dam_tohoku.csv",
+    "ksnkankyo/dam/dam_kanto.csv",
+    "ksnkankyo/dam/dam_hokuriku.csv",
+    "ksnkankyo/dam/dam_chubu.csv",
+    "ksnkankyo/dam/dam_kinki.csv",
+    "ksnkankyo/dam/dam_chugoku.csv",
+    "ksnkankyo/dam/dam_shikoku.csv",
+    "ksnkankyo/dam/dam_kyushu.csv",
+    "ksnkankyo/dam/dam_okinawa.csv"
   ]
 }
 

@@ -55,6 +55,18 @@ const files = {
   ],
   "ksj": [
     "ksj.csv"
+  ],
+  "ksnkankyo": [
+    "ksnkankyo/dam/hokkaido.csv",
+    "ksnkankyo/dam/tohoku.csv",
+    "ksnkankyo/dam/kanto.csv",
+    "ksnkankyo/dam/hokuriku.csv",
+    "ksnkankyo/dam/chubu.csv",
+    "ksnkankyo/dam/kinki.csv",
+    "ksnkankyo/dam/chugoku.csv",
+    "ksnkankyo/dam/shikoku.csv",
+    "ksnkankyo/dam/kyushu.csv",
+    "ksnkankyo/dam/okinawa.csv"
   ]
 }
 
@@ -128,6 +140,15 @@ for(let type of Object.keys(files)){
               usage[x[0]] = usage[x[0]] || [];
               usage[x[0]][x[1]] = usage[x[0]][x[1]] || [];
               usage[x[0]][x[1]][x[2]] = x[3];
+            }
+            break;
+          case "ksnkankyo":
+            for(let x of ary){
+              database[x[0]] = database[x[0]] || [];
+              database[x[0]].push({
+                year : x[1],
+                name : x[2]
+              })
             }
         }
       }else{

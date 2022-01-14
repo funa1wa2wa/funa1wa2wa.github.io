@@ -74,19 +74,30 @@ const files = {
   ]
 }
 
+fetch("https://funa1wa2wa.github.io/seibutsusearch/database/fixName")
+.then(res=>res.text())
+.then(text=>{
+  let fix = {};
+  for (let i of CSVtoAry(text)){
+    fix[i[0]] = i[1];
+  }
+  let fixName = name=>{
+    if(name in fix)return fix[name];
+    return name;
+  }
 for(let type of Object.keys(files)){
   for(let fileName of files[type]){
     fetch(`https://funa1wa2wa.github.io/seibutsusearch/database/${fileName}`)
     .then(res=>res.text())
     .then(text=>{
       if(type!="mesh"){
-        let ary = CSVtoAry(text);
+        const ary = CSVtoAry(text);
         switch(type){
           case "biodic":
             for(let x of ary){
               database[x[5]] = database[x[5]] || [];
               database[x[5]].push({
-                name : x[4],
+                name : fixName(x[4]),
                 year : Number("19"+x[6].slice(0, 2))
               })
             }
@@ -95,7 +106,7 @@ for(let type of Object.keys(files)){
             for(let x of ary){
               database[x[0]] = database[x[0]] || [];
               database[x[0]].push({
-                name : x[4],
+                name : fixName(x[4]),
                 year : 1978
               })
             }
@@ -104,7 +115,7 @@ for(let type of Object.keys(files)){
             for(let x of ary){
               database[x[1].slice(0, 6)] = database[x[1].slice(0, 6)] || [];
               database[x[1].slice(0, 6)].push({
-                name : x[0],
+                name : fixName(x[0]),
                 year : 2004
               })
             }
@@ -151,7 +162,7 @@ for(let type of Object.keys(files)){
               database[x[0]] = database[x[0]] || [];
               database[x[0]].push({
                 year : x[1],
-                name : x[2]
+                name : fixName(x[2])
               })
             }
             break;
@@ -160,7 +171,7 @@ for(let type of Object.keys(files)){
               database[x[0]] = database[x[0]] || [];
               database[x[0]].push({
                 year : x[1],
-                name : x[2]
+                name : fixName(x[2])
               })
             }
             break;
@@ -171,6 +182,9 @@ for(let type of Object.keys(files)){
     });
   }
 }
+});
+
+
 
 // CSV形式のString -> 2次元配列
 function CSVtoAry(str){

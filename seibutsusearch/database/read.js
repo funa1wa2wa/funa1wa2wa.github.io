@@ -68,6 +68,9 @@ const files = {
     "ksnkankyo/dam/dam_shikoku.csv",
     "ksnkankyo/dam/dam_kyushu.csv",
     "ksnkankyo/dam/dam_okinawa.csv"
+  ],
+  "cityLevel":[
+    "cityLevel.csv"
   ]
 }
 
@@ -151,6 +154,16 @@ for(let type of Object.keys(files)){
                 name : x[2]
               })
             }
+            break;
+          case "cityLevel":
+            for(let x of ary){
+              database[x[0]] = database[x[0]] || [];
+              database[x[0]].push({
+                year : x[1],
+                name : x[2]
+              })
+            }
+            break;
         }
       }else{
         cityToMesh = JSON.parse(text);

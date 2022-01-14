@@ -74,7 +74,7 @@ const files = {
   ]
 }
 
-fetch("https://funa1wa2wa.github.io/seibutsusearch/database/fixName")
+fetch("https://funa1wa2wa.github.io/seibutsusearch/database/fixName.csv")
 .then(res=>res.text())
 .then(text=>{
   let fix = {};

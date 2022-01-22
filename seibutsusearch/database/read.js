@@ -48,7 +48,10 @@ const files = {
   ],
   "area": [
     "area/gyorui_area.csv",
-    "area/chorui_area.csv"
+    "area/chorui_area.csv",
+    "area/hachurui_ryoseirui_area.csv",
+    "area/shokubutsu1_area.csv",
+    "area/shokubutsu2_area.csv"
   ],
   "gakumei": [
     "gakumei.csv"
@@ -74,17 +77,17 @@ const files = {
   ]
 }
 
-fetch("https://funa1wa2wa.github.io/seibutsusearch/database/fixName.csv")
-.then(res=>res.text())
-.then(text=>{
-  let fix = {};
-  for (let i of CSVtoAry(text)){
-    fix[i[0]] = i[1];
-  }
-  let fixName = name=>{
-    if(name in fix)return fix[name];
-    return name;
-  }
+// fetch("https://funa1wa2wa.github.io/seibutsusearch/database/fixName")
+// .then(res=>res.text())
+// .then(text=>{
+//   let fix = {};
+//   for (let i of CSVtoAry(text)){
+//     fix[i[0]] = i[1];
+//   }
+//   let fixName = name=>{
+//     if(name in fix)return fix[name];
+//     return name;
+//   }
 for(let type of Object.keys(files)){
   for(let fileName of files[type]){
     fetch(`https://funa1wa2wa.github.io/seibutsusearch/database/${fileName}`)
@@ -152,8 +155,8 @@ for(let type of Object.keys(files)){
             break;
           case "ksj":
             for(let x of ary){
-              usage[x[0]] = usage[x[0]] || [];
-              usage[x[0]][x[1]] = usage[x[0]][x[1]] || [];
+              usage[x[0]] = usage[x[0]] || {};
+              usage[x[0]][x[1]] = usage[x[0]][x[1]] || {};
               usage[x[0]][x[1]][x[2]] = x[3];
             }
             break;
@@ -182,7 +185,7 @@ for(let type of Object.keys(files)){
     });
   }
 }
-});
+// });
 
 
 

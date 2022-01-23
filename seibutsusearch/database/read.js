@@ -51,7 +51,8 @@ const files = {
     "area/chorui_area.csv",
     "area/hachurui_ryoseirui_area.csv",
     "area/shokubutsu1_area.csv",
-    "area/shokubutsu2_area.csv"
+    "area/shokubutsu2_area.csv",
+    "area/honyurui_area.csv"
   ],
   "gakumei": [
     "gakumei.csv"

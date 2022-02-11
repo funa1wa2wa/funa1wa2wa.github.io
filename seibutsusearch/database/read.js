@@ -5,6 +5,7 @@ let database = [];
 let creature = {};
 let cityToMesh = {};
 let usage = [];
+let suikei = {};
 
 const files = {
   "biodic": [
@@ -75,10 +76,13 @@ const files = {
   ],
   "cityLevel":[
     "cityLevel.csv"
+  ],
+  "suikei": [
+    "suikei.json"
   ]
 }
 
-fetch("https://funa1wa2wa.github.io/seibutsusearch/database/fixName")
+fetch("https://funa1wa2wa.github.io/seibutsusearch/database/fixName.csv")
 .then(res=>res.text())
 .then(text=>{
   let fix = {};
@@ -86,106 +90,131 @@ fetch("https://funa1wa2wa.github.io/seibutsusearch/database/fixName")
     fix[i[0]] = i[1];
   }
   let fixName = name=>{
+    name = name.replaceAll("へ", "ヘ").replaceAll("べ", "ベ").replaceAll("－", "ー").replaceAll("類", "");
+    let kanaMap = {
+          'ｶﾞ': 'ガ', 'ｷﾞ': 'ギ', 'ｸﾞ': 'グ', 'ｹﾞ': 'ゲ', 'ｺﾞ': 'ゴ',
+          'ｻﾞ': 'ザ', 'ｼﾞ': 'ジ', 'ｽﾞ': 'ズ', 'ｾﾞ': 'ゼ', 'ｿﾞ': 'ゾ',
+          'ﾀﾞ': 'ダ', 'ﾁﾞ': 'ヂ', 'ﾂﾞ': 'ヅ', 'ﾃﾞ': 'デ', 'ﾄﾞ': 'ド',
+          'ﾊﾞ': 'バ', 'ﾋﾞ': 'ビ', 'ﾌﾞ': 'ブ', 'ﾍﾞ': 'ベ', 'ﾎﾞ': 'ボ',
+          'ﾊﾟ': 'パ', 'ﾋﾟ': 'ピ', 'ﾌﾟ': 'プ', 'ﾍﾟ': 'ペ', 'ﾎﾟ': 'ポ',
+          'ｳﾞ': 'ヴ', 'ﾜﾞ': 'ヷ', 'ｦﾞ': 'ヺ',
+          'ｱ': 'ア', 'ｲ': 'イ', 'ｳ': 'ウ', 'ｴ': 'エ', 'ｵ': 'オ',
+          'ｶ': 'カ', 'ｷ': 'キ', 'ｸ': 'ク', 'ｹ': 'ケ', 'ｺ': 'コ',
+          'ｻ': 'サ', 'ｼ': 'シ', 'ｽ': 'ス', 'ｾ': 'セ', 'ｿ': 'ソ',
+          'ﾀ': 'タ', 'ﾁ': 'チ', 'ﾂ': 'ツ', 'ﾃ': 'テ', 'ﾄ': 'ト',
+          'ﾅ': 'ナ', 'ﾆ': 'ニ', 'ﾇ': 'ヌ', 'ﾈ': 'ネ', 'ﾉ': 'ノ',
+          'ﾊ': 'ハ', 'ﾋ': 'ヒ', 'ﾌ': 'フ', 'ﾍ': 'ヘ', 'ﾎ': 'ホ',
+          'ﾏ': 'マ', 'ﾐ': 'ミ', 'ﾑ': 'ム', 'ﾒ': 'メ', 'ﾓ': 'モ',
+          'ﾔ': 'ヤ', 'ﾕ': 'ユ', 'ﾖ': 'ヨ',
+          'ﾗ': 'ラ', 'ﾘ': 'リ', 'ﾙ': 'ル', 'ﾚ': 'レ', 'ﾛ': 'ロ',
+          'ﾜ': 'ワ', 'ｦ': 'ヲ', 'ﾝ': 'ン',
+          'ｧ': 'ァ', 'ｨ': 'ィ', 'ｩ': 'ゥ', 'ｪ': 'ェ', 'ｫ': 'ォ',
+          'ｯ': 'ッ', 'ｬ': 'ャ', 'ｭ': 'ュ', 'ｮ': 'ョ',
+          '｡': '。', '､': '、', 'ｰ': 'ー', '｢': '「', '｣': '」', '･': '・'
+    };
+    name = name.replace(new RegExp('(' + Object.keys(kanaMap).join('|') + ')', 'g'), match=>kanaMap[match]).replace(/ﾞ/g, '゛').replace(/ﾟ/g, '゜');
     if(name in fix)return fix[name];
     return name;
   }
-for(let type of Object.keys(files)){
-  for(let fileName of files[type]){
-    fetch(`https://funa1wa2wa.github.io/seibutsusearch/database/${fileName}`)
-    .then(res=>res.text())
-    .then(text=>{
-      if(type!="mesh"){
-        const ary = CSVtoAry(text);
-        switch(type){
-          case "biodic":
-            for(let x of ary){
-              database[x[5]] = database[x[5]] || [];
-              database[x[5]].push({
-                name : fixName(x[4]),
-                year : Number("19"+x[6].slice(0, 2))
-              })
-            }
-            break;
-          case "biodic02":
-            for(let x of ary){
-              database[x[0]] = database[x[0]] || [];
-              database[x[0]].push({
-                name : fixName(x[4]),
-                year : 1978
-              })
-            }
-            break;
-          case "biodic06":
-            for(let x of ary){
-              database[x[1].slice(0, 6)] = database[x[1].slice(0, 6)] || [];
-              database[x[1].slice(0, 6)].push({
-                name : fixName(x[0]),
-                year : 2004
-              })
-            }
-            break;
-          case "gairai":
-            for(let x of ary){
-              creature[x[4]] = creature[x[4]] || {};
-              Object.assign(creature[x[4]], {
-                alien: true,
-                origin: x[0],
-                specify: x[2],
-                remark: x[10]=="*"?"":x[10],
-                distribution: x[11]
-              });
-            }
-            break;
-          case "type":
-            for(let x of ary){
-              creature[x[1]] = creature[x[1]] || {};
-              creature[x[1]].type = x[0];
-            }
-            break;
-          case "area":
-            for(let x of ary){
-              creature[x[0]] = creature[x[0]] || {};
-              creature[x[0]].place = Object.fromEntries(x.slice(1).map((x,i)=>[PLACE_NAME[i], x==1]));
-            }
-            break;
-          case "gakumei":
-            for(let x of ary){
-              creature[x[1]] = creature[x[1]] || {};
-              creature[x[1]].scientific  = x[0];
-            }
-            break;
-          case "ksj":
-            for(let x of ary){
-              usage[x[0]] = usage[x[0]] || {};
-              usage[x[0]][x[1]] = usage[x[0]][x[1]] || {};
-              usage[x[0]][x[1]][x[2]] = x[3];
-            }
-            break;
-          case "ksnkankyo":
-            for(let x of ary){
-              database[x[0]] = database[x[0]] || [];
-              database[x[0]].push({
-                year : x[1],
-                name : fixName(x[2])
-              })
-            }
-            break;
-          case "cityLevel":
-            for(let x of ary){
-              database[x[0]] = database[x[0]] || [];
-              database[x[0]].push({
-                year : x[1],
-                name : fixName(x[2])
-              })
-            }
-            break;
+  for(let type of Object.keys(files)){
+    for(let fileName of files[type]){
+      fetch(`https://funa1wa2wa.github.io/seibutsusearch/database/${fileName}`)
+      .then(res=>res.text())
+      .then(text=>{
+        if(type=="mesh"){
+          cityToMesh = JSON.parse(text);
+        }else if(type=="suikei"){
+          suikei = JSON.parse(text);
+        }else{
+          const ary = CSVtoAry(text);
+          switch(type){
+            case "biodic":
+              for(let x of ary){
+                database[x[5]] = database[x[5]] || [];
+                database[x[5]].push({
+                  name : fixName(x[4]),
+                  year : Number("19"+x[6].slice(0, 2))
+                })
+              }
+              break;
+            case "biodic02":
+              for(let x of ary){
+                database[x[0]] = database[x[0]] || [];
+                database[x[0]].push({
+                  name : fixName(x[4]),
+                  year : 1978
+                })
+              }
+              break;
+            case "biodic06":
+              for(let x of ary){
+                database[x[1].slice(0, 6)] = database[x[1].slice(0, 6)] || [];
+                database[x[1].slice(0, 6)].push({
+                  name : fixName(x[0]),
+                  year : 2004
+                })
+              }
+              break;
+            case "gairai":
+              for(let x of ary){
+                creature[x[4]] = creature[x[4]] || {};
+                Object.assign(creature[x[4]], {
+                  alien: true,
+                  origin: x[0],
+                  specify: x[2],
+                  remark: x[10]=="*"?"":x[10],
+                  distribution: x[11]
+                });
+              }
+              break;
+            case "type":
+              for(let x of ary){
+                creature[x[1]] = creature[x[1]] || {};
+                creature[x[1]].type = x[0];
+              }
+              break;
+            case "area":
+              for(let x of ary){
+                creature[x[0]] = creature[x[0]] || {};
+                creature[x[0]].place = Object.fromEntries(x.slice(1).map((x,i)=>[PLACE_NAME[i], x==1]));
+              }
+              break;
+            case "gakumei":
+              for(let x of ary){
+                creature[x[1]] = creature[x[1]] || {};
+                creature[x[1]].scientific  = x[0];
+              }
+              break;
+            case "ksj":
+              for(let x of ary){
+                usage[x[0]] = usage[x[0]] || {};
+                usage[x[0]][x[1]] = usage[x[0]][x[1]] || {};
+                usage[x[0]][x[1]][x[2]] = x[3];
+              }
+              break;
+            case "ksnkankyo":
+              for(let x of ary){
+                database[x[0]] = database[x[0]] || [];
+                database[x[0]].push({
+                  year : x[1],
+                  name : fixName(x[2])
+                })
+              }
+              break;
+            case "cityLevel":
+              for(let x of ary){
+                database[x[0]] = database[x[0]] || [];
+                database[x[0]].push({
+                  year : x[1],
+                  name : fixName(x[2])
+                })
+              }
+              break;
+          }
         }
-      }else{
-        cityToMesh = JSON.parse(text);
-      }
-    });
+      });
+    }
   }
-}
 });
 
 

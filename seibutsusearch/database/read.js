@@ -94,6 +94,7 @@ fetch("https://funa1wa2wa.github.io/seibutsusearch/database/fixName.csv")
     fix[i[0]] = i[1];
   }
   fixName = name=>{
+    if(typeof name != "string"){return "";}
     name = name.replaceAll("へ", "ヘ").replaceAll("べ", "ベ").replaceAll("－", "ー").replaceAll("類", "");
     let kanaMap = {
           'ｶﾞ': 'ガ', 'ｷﾞ': 'ギ', 'ｸﾞ': 'グ', 'ｹﾞ': 'ゲ', 'ｺﾞ': 'ゴ',

@@ -53,7 +53,10 @@ const files = {
     "area/hachurui_ryoseirui_area.csv",
     "area/shokubutsu1_area.csv",
     "area/shokubutsu2_area.csv",
-    "area/honyurui_area.csv"
+    "area/shokubutsu3_area.csv",
+    "area/honyurui_area.csv",
+    "area/kairui1_area.csv",
+    "area/konchu1_area.csv"
   ],
   "gakumei": [
     "gakumei.csv"
@@ -132,8 +135,9 @@ fetch("https://funa1wa2wa.github.io/seibutsusearch/database/fixName.csv")
               for(let x of ary){
                 database[x[5]] = database[x[5]] || [];
                 database[x[5]].push({
-                  name : fixName(x[4]),
-                  year : Number("19"+x[6].slice(0, 2))
+                  name: fixName(x[4]),
+                  year: Number("19"+x[6].slice(0, 2)),
+                  ref: "緑の国勢調査"
                 })
               }
               break;
@@ -142,7 +146,8 @@ fetch("https://funa1wa2wa.github.io/seibutsusearch/database/fixName.csv")
                 database[x[0]] = database[x[0]] || [];
                 database[x[0]].push({
                   name : fixName(x[4]),
-                  year : 1978
+                  year : 1978,
+                  ref : "緑の国勢調査"
                 })
               }
               break;
@@ -151,7 +156,8 @@ fetch("https://funa1wa2wa.github.io/seibutsusearch/database/fixName.csv")
                 database[x[1].slice(0, 6)] = database[x[1].slice(0, 6)] || [];
                 database[x[1].slice(0, 6)].push({
                   name : fixName(x[0]),
-                  year : 2004
+                  year : 2004,
+                  ref : "緑の国勢調査"
                 })
               }
               break;
@@ -197,7 +203,8 @@ fetch("https://funa1wa2wa.github.io/seibutsusearch/database/fixName.csv")
                 database[x[0]] = database[x[0]] || [];
                 database[x[0]].push({
                   year : x[1],
-                  name : fixName(x[2])
+                  name : fixName(x[2]),
+                  ref: "河川水辺の国勢調査"
                 })
               }
               break;

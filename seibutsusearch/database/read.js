@@ -6,6 +6,7 @@ let creature = {};
 let cityToMesh = {};
 let usage = [];
 let suikei = {};
+let fixName;
 
 const files = {
   "biodic": [
@@ -92,7 +93,7 @@ fetch("https://funa1wa2wa.github.io/seibutsusearch/database/fixName.csv")
   for (let i of CSVtoAry(text)){
     fix[i[0]] = i[1];
   }
-  let fixName = name=>{
+  fixName = name=>{
     name = name.replaceAll("へ", "ヘ").replaceAll("べ", "ベ").replaceAll("－", "ー").replaceAll("類", "");
     let kanaMap = {
           'ｶﾞ': 'ガ', 'ｷﾞ': 'ギ', 'ｸﾞ': 'グ', 'ｹﾞ': 'ゲ', 'ｺﾞ': 'ゴ',

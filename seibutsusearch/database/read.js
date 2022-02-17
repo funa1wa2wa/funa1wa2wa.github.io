@@ -59,9 +59,13 @@ const files = {
     "area/shokubutsu5_area.csv",
     "area/shokubutsu6_area.csv",
     "area/shokubutsu7_area.csv",
+    "area/shokubutsu8_area.csv",
+    "area/shokubutsu9_area.csv",
     "area/honyurui_area.csv",
     "area/kairui1_area.csv",
-    "area/konchu1_area.csv"
+    "area/konchu1_area.csv",
+    "area/konchu2_area.csv",
+    "area/konchu3_area.csv"
   ],
   "gakumei": [
     "gakumei.csv"
@@ -231,8 +235,8 @@ fetch("https://funa1wa2wa.github.io/seibutsusearch/database/fixName.csv")
               for(let x of ary){
                 database[x[2]] = database[x[2]] || [];
                 database[x[2]].push({
-                  year : x[1],
-                  name : fixName(x[0]),
+                  year : x[0],
+                  name : fixName(x[1]),
                   ref: "日本のコイ科魚類"
                 })
               }
